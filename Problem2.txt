@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+int main() {
+    int t;
+    cin>>t;
+    for(int i=0; i<t; i++){
+        long long int n;
+        cin>>n;
+        long long int a=2,b=8,c=34;
+        long long int sum=a+b;
+        while(c<=n){
+            sum+=c;
+            a=b;
+            b=c;
+            c=a+4*b;
+        }
+        if(n<8 && n>=2){cout<<a<<endl;}
+        else if(n<2){cout<<"0"<<endl;}
+        else{cout<<sum<<endl;}
+    }
+    return 0;
+}
