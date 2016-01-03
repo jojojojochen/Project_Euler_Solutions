@@ -1,0 +1,45 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int numOfFactors(int n){
+    if(n==1){return 1;}
+    int *f,k=sqrt(n),num=n,answer=1;
+    f=new int [k+1];
+    for(int i=1; i*i<=n; i++){f[i]=0;}
+    for(int i=2; i*i<=num; i++){
+        if(num%i==0){
+            f[i]++;
+            num/=i--;
+        }
+    }
+    if(num==n){return 2;}
+    if(num>k){answer*=2;}
+    else{f[num]++;;}
+    for(int i=2; i*i<=n; i++){
+        if(f[i]){
+            answer*=f[i]+1;
+        }
+    }
+    return answer;
+}
+int main() {
+    int t;
+    cin>>t;
+    for(int i=0; i<t; i++){
+        int n,x,y,answer=1;
+        cin>>n;
+        for(int i=1; i>=1; i++){
+            if(i%2==0){x=i/2; y=i+1;}
+            else{x=(i+1)/2; y=i;}
+            if(numOfFactors(x)*numOfFactors(y)>n){ //gcd of x and y has to be 1 because they are adjacent
+                answer=x*y; 
+                break;
+            }
+        }
+        cout<<answer<<endl;
+    }
+    return 0;
+}
