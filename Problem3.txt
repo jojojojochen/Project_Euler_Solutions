@@ -1,0 +1,19 @@
+#include <cmath>
+#include <iostream>
+using namespace std;
+int main() {
+    int t;
+    cin>>t;
+    for(int i=0; i<t; i++){
+        unsigned long long int n,answer=1;
+        cin>>n;
+        for(unsigned long long int j=2; j*j<=n; j++){
+            if(n%j==0){
+                n/=j--;
+                answer=max(answer,j);
+            }
+        }
+        cout<<max(answer,n)<<endl;
+    }
+    return 0;
+}

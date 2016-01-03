@@ -1,0 +1,24 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+long long int gcd(int a,int b){
+    if(b==0){return a;}
+    else{return gcd(b,a%b);}
+}
+long long int smallestMultiple(int n){
+    if(n==1){return 1;}
+    else{return smallestMultiple(n-1)*n/gcd(smallestMultiple(n-1),n);}
+}
+int main() {
+    int t;
+    cin>>t;
+    for(int i=0; i<t; i++){
+        int n;
+        cin>>n;
+        cout<<smallestMultiple(n)<<endl;
+    }
+    return 0;
+}
