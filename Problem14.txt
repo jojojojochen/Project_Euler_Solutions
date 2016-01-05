@@ -1,0 +1,45 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int maxInt=5000001;
+int main() {
+    unsigned long long int *dp,*answer,maxlength=0,maxIt=0;
+    dp=new unsigned long long int [maxInt];
+    answer=new unsigned long long int [maxInt];
+    for(int i=0; i<maxInt; i++){dp[i]=0;}
+    dp[1]=1;
+    for(int i=2; i<maxInt; i++){
+        unsigned long long int j=i,count=1;
+        while(j>1){
+            if(j%2){j=3*j+1;}
+            else{j/=2;}
+            if(j<i){
+                count+=dp[j];
+                break;
+            }
+            count++;
+        }
+        dp[i]=count;
+    }
+    for(int i=1; i<maxInt; i++){
+        if(dp[i]>=maxlength){
+            maxlength=dp[i];
+            answer[i]=i;
+        }
+        else{
+            answer[i]=answer[i-1];
+        }
+    }
+    int t;
+    cin>>t;
+    for(int i=0; i<t; i++){
+        unsigned long long int n;
+        maxlength=0,maxIt=0;
+        cin>>n;
+        cout<<answer[n]<<endl;
+    }
+return 0;
+}
