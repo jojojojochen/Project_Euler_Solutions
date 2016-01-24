@@ -1,0 +1,42 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+vector<int>Twice(vector<int>v){
+    vector<int>answer;
+    int e=0;
+    for(int i=0; i<v.size(); i++){
+        if(v[i]*2+e>=10){
+            answer.push_back((v[i]*2+e)%10);
+            e=1;
+        }
+        else{
+            answer.push_back(v[i]*2+e);
+            e=0;
+        }
+    }
+    if(e){
+        answer.push_back(e);
+    }
+return answer;
+}
+int main() {
+    vector<int>v(1,1),sum;
+    for(int i=0; i<10000; i++){
+        sum.push_back(0);
+        v=Twice(v);
+        for(int j=0; j<v.size(); j++){
+            sum[i]+=v[j];
+        }
+    }
+    int t;
+    cin>>t;
+    for(int i=0; i<t; i++){
+        int n;
+        cin>>n;
+        cout<<sum[n-1]<<endl;
+    }
+    return 0;
+}
