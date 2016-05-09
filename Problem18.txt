@@ -1,0 +1,29 @@
+#include <cmath>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int main() {
+    int n;
+    cin>>n;
+    for(int i=0; i<n; i++){
+        int dp[16][16]={0}; //straightforward 2D DP problem
+        int tri[16][16]={0};
+        int k,answer=0;
+        cin>>k;
+        for(int j=0; j<k; j++){
+            for(int l=0; l<=j; l++){
+                cin>>tri[j][l];
+            }
+        }
+        dp[0][0]=tri[0][0];
+        for(int j=1; j<k; j++){
+            for(int l=0; l<=j; l++){
+                if(l==0){dp[j][l]=tri[j][l]+dp[j-1][l];}
+                else{dp[j][l]=max(tri[j][l]+dp[j-1][l],tri[j][l]+dp[j-1][l-1]);}
+            }
+        }
+        for(int j=0; j<k; j++){answer=max(answer,dp[k-1][j]);}
+        cout<<answer<<endl;
+    }
+    return 0;
+}
