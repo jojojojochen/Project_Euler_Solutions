@@ -1,0 +1,37 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+long long int ConvertJulianDateToJulianDayNumber(long long int y,int m,int d){
+    int a=(14-m)/12;
+    int year=y+4800-a;
+    int month=m+12*a-3;
+    return d+(153*month+2)/5+365*year+(year/4)-(year/100)+(year/400)-32045;
+} //O(1) Constant time
+int ZellarCongruence(int y,int m,int d){
+    if(m==1||m==2){
+            m=m+12;
+            y=y-1;
+        }
+    return (d+13*(m+1)/5+y%100+(y%100)/4+(y/100)/4+5*(y/100)+6)%7; //0=sunday...6=saturday
+} //O(1) Constant time
+
+int main() {
+    int t;
+    cin>>t;
+    for(int a=0; a<t; a++){
+        long long int y1,y2,answer=0;
+        int m1,m2,d1,d2;
+        cin>>y1>>m1>>d1;
+        cin>>y2>>m2>>d2;
+        long long int difference=ConvertJulianDateToJulianDayNumber(y2,m2,d2)-ConvertJulianDateToJulianDayNumber(y1,m1,d1);
+        if(ZellarCongruence(y1,m1,d1)==0){
+            answer++;
+        }
+        answer+=difference/7;
+        cout<<answer<<endl;
+    }
+    return 0;
+}
