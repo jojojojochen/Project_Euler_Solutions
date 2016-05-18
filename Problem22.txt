@@ -1,0 +1,39 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <string>
+using namespace std;
+int score(string s){
+    int sum=0;
+    for(int i=0; i<s.length(); i++){
+        sum+=s[i]-'A'+1;
+    }
+    return sum;
+}//O(n)
+int main() {
+    vector<string>v;
+    int n;
+    cin>>n;
+    for(int i=0; i<n; i++){
+        string s;
+        cin>>s;
+        v.push_back(s);
+    }
+    int t;
+    cin>>t;
+    sort(v.begin(),v.end()); //O(nlogn)
+    int len=v.size();
+    for(int i=0; i<t; i++){
+        string s;
+        cin>> s;
+        for(int j=0; j<len; j++){
+            if(v[j]==s){
+                cout<<score(s)*(j+1)<<endl;
+                break;
+            }
+        }
+    }
+    return 0;
+}
